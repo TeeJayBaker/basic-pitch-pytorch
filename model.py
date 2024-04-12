@@ -182,7 +182,7 @@ def argrelmax(x: torch.Tensor) -> torch.Tensor:
     return torch.nonzero((diff1 > 0) * (diff2 > 0), as_tuple=True)
 
 
-class basic_pitch(nn.Module):
+class basic_pitch_torch(nn.Module):
     """
     Port of basic_pitch pitch prediction to pytorch
 
@@ -206,7 +206,7 @@ class basic_pitch(nn.Module):
         contour_bins_per_semitone: int = 3,
         device: str = "mps",
     ):
-        super(basic_pitch, self).__init__()
+        super(basic_pitch_torch, self).__init__()
 
         self.sr = sr
         self.hop_length = hop_length
@@ -245,10 +245,11 @@ class basic_pitch(nn.Module):
         )
 
         self.contour_1 = nn.Sequential(
-            nn.Conv2d(self.n_harmonics, self.n_filters_contour, (5, 5), padding="same"),
-            nn.BatchNorm2d(self.n_filters_contour),
-            nn.ReLU(),
-            nn.Conv2d(self.n_filters_contour, 8, (3 * 13, 3), padding="same"),
+            # nn.Conv2d(self.n_harmonics, self.n_filters_contour, (5, 5), padding="same"),
+            # nn.BatchNorm2d(self.n_filters_contour),
+            # nn.ReLU(),
+            # nn.Conv2d(self.n_filters_contour, 8, (3 * 13, 3), padding="same"),
+            nn.Conv2d(self.n_harmonics, 8, (3 * 13, 3), padding="same"),
             nn.BatchNorm2d(8),
             nn.ReLU(),
         )
