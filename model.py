@@ -272,7 +272,7 @@ class basic_pitch_torch(nn.Module):
         )
 
         self.onset_2 = nn.Sequential(
-            nn.Conv2d(self.n_filters_onsets + 1, 1, (5, 5), padding="same"),
+            nn.Conv2d(self.n_filters_onsets + 1, 1, (3, 3), padding="same"),
             nn.Sigmoid(),
         )
 
