@@ -84,3 +84,6 @@ new_state_dict["cqt.cqt_kernels_real"] = old_state_dict["cqt.cqt_kernels_real"]
 new_state_dict["cqt.cqt_kernels_imag"] = old_state_dict["cqt.cqt_kernels_imag"]
 
 torch_model.load_state_dict(new_state_dict)
+
+# Save the new state dict
+torch.save(torch_model.state_dict(), "bp_pytorch.pth")
